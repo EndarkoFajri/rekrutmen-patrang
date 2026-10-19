@@ -73,26 +73,7 @@ class JobResource extends Resource
                 ->placeholder('Contoh: Akademik, Riset, Teknologi')
                 ->required(),
         ]);
-            // Kartu 4: Kategori &   
-
-            // Select::make('category')
-            // ->label('Kategori')
-            // ->options(
-            //     ['Akademik' => 'Akademik',
-            //     'Riset' => 'Riset',
-            //     'Administrasi' => 'Administrasi',
-            //     'Layanan' => 'Layanan',
-            //     'Laboratorium' => 'Laboratorium',
-            //     'Teknologi' => 'Teknologi',]
-            //         )
-            //         ->searchable()
-            //         ->createOptionForm([
-            //     // Memungkinkan admin memasukkan nama kategori baru jika belum ada di daftar
-            // ])
-            // ->required(),
-            //     ]);
-
-                
+    
 }
 
    public static function table(Table $table): Table

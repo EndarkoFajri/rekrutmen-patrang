@@ -14,6 +14,10 @@ class Application extends Model
         'user_id',
         'attachments',
         'status',
+        'attachments',
+    'interview_date',
+    'interview_location',
+    'interview_notes',
     ];
 
     protected $casts = [

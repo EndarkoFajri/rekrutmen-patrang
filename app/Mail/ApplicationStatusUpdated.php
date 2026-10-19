@@ -26,6 +26,11 @@ class ApplicationStatusUpdated extends Mailable
             subject: 'Pembaruan Status Lamaran - ' . ($this->application->job->title ?? 'Universitas Patrang'),
         );
     }
+    public function build()
+    {
+        return $this->subject('Pembaruan Status Lamaran - Universitas Patrang')
+                    ->view('emails.application_status_updated'); // sesuaikan nama view emailmu
+    }
 
     public function content(): Content
     {

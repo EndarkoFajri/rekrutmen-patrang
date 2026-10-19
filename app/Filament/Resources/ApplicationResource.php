@@ -5,6 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ApplicationResource\Pages;
 use App\Models\Application;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -64,6 +67,22 @@ class ApplicationResource extends Resource
                     return new \Illuminate\Support\HtmlString($html);
                 })
                 ->columnSpanFull(),
+
+                Forms\Components\Section::make('Jadwal & Informasi Wawancara')
+                ->description('Diisi jika pelamar dipanggil untuk tahap wawancara / tes seleksi')
+                ->schema([
+                    DateTimePicker::make('interview_date')
+                        ->label('Tanggal & Waktu Wawancara')
+                        ->native(false),
+                    TextInput::make('interview_location')
+                        ->label('Lokasi / Link Meet')
+                        ->placeholder('Contoh: Ruang Rektorat Lt. 2 / https://zoom.us/...'),
+                    Textarea::make('interview_notes')
+                        ->label('Catatan Tambahan untuk Pelamar')
+                        ->placeholder('Contoh: Harap membawa ijazah asli dan pakaian rapi.')
+                        ->columnSpanFull(),
+                ])->columns(2),
+
         ]);
 }
     public static function table(Table $table): Table

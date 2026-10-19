@@ -25,10 +25,17 @@ class AuthController extends Controller
 
         $remember = $request->has('remember');
 
-        if (Auth::attempt($credentials, $remember)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('jobs.index'));
-        }
+  if (Auth::attempt($credentials)) {
+    $request->session()->regenerate();
+    
+    // Jika yang login pelamar biasa, lempar ke halaman utama
+    if (Auth::user()->email !== 'endarko@uds.ac.id') {
+        return redirect('/');
+    }
+
+    // Jika admin, baru lempar ke admin dashboard
+    return redirect('/admin');
+}
 
         return back()->withErrors([
             'email' => 'Alamat email atau kata sandi yang Anda masukkan salah.',

@@ -30,7 +30,7 @@
             @endphp
 
             @if($status === 'interview' || $status === 'wawancara')
-                <p>Selamat! Anda dinyatakan <strong>LOLOS</strong> seleksi tahap awal untuk posisi <strong>{{ $application->job->title ?? 'Pekerjaan' }}</strong> dan diundang untuk mengikuti tahap wawancara.</p>
+                <p>Selamat! Anda dinyatakan <strong>LOLOS</strong> seleksi tahap awal untuk posisi <strong>{{ $application->job->title ?? 'Pekerjaan' }}</strong> dan diundang untuk mengikuti tahap wawancara Silahkan siapkan diri Anda cek jadwal wawancara pada akun anda.</p>
                 <div style="text-align: center;">
                     <span class="badge badge-warning">Tahap Wawancara</span>
                 </div>
@@ -51,12 +51,37 @@
                 </div>
             @endif
 
+              <!-- KOTAK JADWAL WAWANCARA (HANYA MUNCUL JIKA JADWAL DIISI) -->
+@if($application->interview_date)
+<div style="background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 16px; border-radius: 6px; margin: 20px 0; text-align: left;">
+    <h3 style="margin-top: 0; color: #0369a1; font-size: 16px; font-weight: bold;">
+        📅 Detail Jadwal Wawancara & Seleksi
+    </h3>
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #334155;">
+        <tr>
+            <td style="padding: 4px 0; font-weight: bold; width: 120px;">Waktu</td>
+            <td style="padding: 4px 0;">: {{ \Carbon\Carbon::parse($application->interview_date)->translatedFormat('l, d F Y - H:i') }} WIB</td>
+        </tr>
+        <tr>
+            <td style="padding: 4px 0; font-weight: bold;">Lokasi / Link</td>
+            <td style="padding: 4px 0;">: {{ $application->interview_location ?? '-' }}</td>
+        </tr>
+        @if($application->interview_notes)
+        <tr>
+            <td style="padding: 4px 0; font-weight: bold;">Catatan</td>
+            <td style="padding: 4px 0;">: {{ $application->interview_notes }}</td>
+        </tr>
+        @endif
+    </table>
+</div>
+@endif          
+
             <p>Silakan masuk ke portal rekrutmen untuk melihat jadwal dan rincian informasi selengkapnya:</p>
 
             <!-- TOMBOL DIUBAH MENJADI PRESISI DI TENGAH -->
             <div style="text-align: center; margin: 24px 0;">
                 <a href="{{ url('/my-applications/' . $application->id) }}" class="btn">
-                    Lihat Status Lamaran &rarr;
+                    Lihat Status Lamaran 
                 </a>
             </div>
 

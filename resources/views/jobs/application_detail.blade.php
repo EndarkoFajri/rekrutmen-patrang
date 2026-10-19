@@ -7,7 +7,23 @@
     <a href="{{ url('/my-applications') }}" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-[#2596be] transition-colors mb-6">
         &larr; Kembali ke daftar lamaran
     </a>
-
+@if($application->interview_date)
+<div class="p-4 mb-6 border-l-4 border-blue-500 rounded-r-lg bg-blue-50 shadow-sm">
+    <h4 class="flex items-center text-lg font-bold text-blue-900">
+        <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        Jadwal Wawancara & Seleksi
+    </h4>
+    <div class="mt-3 space-y-1.5 text-sm text-blue-800">
+        <p><strong>Waktu:</strong> {{ \Carbon\Carbon::parse($application->interview_date)->translatedFormat('l, d F Y - H:i') }} WIB</p>
+        <p><strong>Lokasi / Link:</strong> {{ $application->interview_location ?? '-' }}</p>
+        @if($application->interview_notes)
+            <p><strong>Catatan:</strong> {{ $application->interview_notes }}</p>
+        @endif
+    </div>
+</div>
+@endif
     <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-sm mb-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
